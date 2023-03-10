@@ -6,6 +6,6 @@ engineering project.
 
 
 ```@contents
-Pages = ["modules/Utilities.md"]
+Pages = ["modules/Utilities.md" "modules/FloquetUtilities.md"]
 Depth = 3
 ```

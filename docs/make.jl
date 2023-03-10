@@ -1,5 +1,7 @@
-push!(LOAD_PATH,"../src/")
+push!(LOAD_PATH, "../src/")
 using Documenter, Looping
 
 DocMeta.setdocmeta!(Looping.Utilities, :DocTestSetup, :(using Looping.Utilities); recursive=true)
-makedocs(sitename="Looping Documentation", modules=[Looping.Utilities], draft=false, strict=:doctest)
+DocMeta.setdocmeta!(Looping.FloquetUtils, :DocTestSetup, :(using Looping.FloquetUtils); recursive=true)
+
+makedocs(sitename="Looping Documentation", modules=map(eval, modules), draft=false, strict=:doctest)

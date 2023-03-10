@@ -3,7 +3,6 @@ This is a loose collection to naively calculate the time evolution
 operator and Floquet Hamiltonian for a given time dependent
 Hamiltonian `H(t)`.
 """
-
 module FloquetUtils
 
 import LinearAlgebra: I, eigvecs, eigen, Diagonal
