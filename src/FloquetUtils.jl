@@ -1,3 +1,9 @@
+"""
+This is a loose collection to naively calculate the time evolution
+operator and Floquet Hamiltonian for a given time dependent
+Hamiltonian `H(t)`.
+"""
+
 module FloquetUtils
 
 import LinearAlgebra: I, eigvecs, eigen, Diagonal
@@ -31,7 +37,7 @@ end
 
 
 """
-    floquet_hamiltonian(U, T)
+    floquet_hamiltonian(U::Matrix, T)
 
 Returns the Floquet Hamiltonian given a unitary matrix `U` and a time
 `T`.
@@ -43,11 +49,11 @@ end
 
 
 """
-    floquet_hamiltonian(H(t), T)
+    floquet_hamiltonian(H::Function, T)
 
 Returns the Floquet Hamiltonian given a Hamiltionian `H` and a time
 `T`. The rest arguments are passed on to
-`DifferentialEquations.solve`.
+[`DifferentialEquations.solve`](@ref).
 """
 function floquet_hamiltonian(H::Function, T::Real, args...; kwargs...)
     U = time_evolution_op(H, T, args...; kwargs...)
