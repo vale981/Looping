@@ -93,12 +93,12 @@ struct KickOperator
     H_F::Matrix
 
 
-"""
-    KickOperator(U(t), H_F)
+    @doc """
+        KickOperator(U(t), H_F::Matrix)
 
-Return the Kick operator Given the time evolution operator `U(t)` and the Floquet Hamiltonian
-`H_F`.
-"""
+    Return the Kick operator Given the time evolution operator `U(t)` and the Floquet Hamiltonian
+    `H_F`.
+    """
     function KickOperator(U, H_F::Matrix)
         if size(U(0)) != size(H_F)
             throw(DimensionMismatch("`U` and `H_F` should have the same dimension."))
