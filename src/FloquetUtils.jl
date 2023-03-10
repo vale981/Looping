@@ -19,7 +19,7 @@ using ..Utilities
 
 Calculate the time evolution operator for a Hamiltonian `H` up to a
 total time `T`. The rest arguments are passed on to
-`DifferentialEquations.solve`.
+[`de.solve`](@ref).
 """
 function time_evolution_op(H::Function, T::Real, args...; kwargs...)
     function u_step!(dU, U, _, t)
@@ -52,7 +52,7 @@ end
 
 Returns the Floquet Hamiltonian given a Hamiltionian `H` and a time
 `T`. The rest arguments are passed on to
-[`DifferentialEquations.solve`](@ref).
+[`de.solve`](@ref).
 """
 function floquet_hamiltonian(H::Function, T::Real, args...; kwargs...)
     U = time_evolution_op(H, T, args...; kwargs...)
@@ -93,12 +93,12 @@ struct KickOperator
     H_F::Matrix
 
 
-    """
-        KickOperator(U(t), H_F)
+"""
+    KickOperator(U(t), H_F)
 
-    Return the Kick operator Given the time evolution operator `U(t)` and the Floquet Hamiltonian
-    `H_F`.
-    """
+Return the Kick operator Given the time evolution operator `U(t)` and the Floquet Hamiltonian
+`H_F`.
+"""
     function KickOperator(U, H_F::Matrix)
         if size(U(0)) != size(H_F)
             throw(DimensionMismatch("`U` and `H_F` should have the same dimension."))
@@ -107,7 +107,11 @@ struct KickOperator
     end
 end
 
+"""
+    KickOperator(H(t), T)
 
+Return the Kick operator Given the Hamiltonian `H(t)` and the total time ``T``.
+"""
 function KickOperator(H::Function, T::Real)
     U = time_evolution_op(H, T)
     H_F = floquet_hamiltonian(U(T), T)
